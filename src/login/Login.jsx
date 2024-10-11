@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import Navbar from '../pages/shared/navbar/Navbar'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 
 export default function Login() {
-    const {loginUser}=useContext(AuthContext);
+    const {loginUser,loginWithGoogle}=useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log("enter");
     const handleLogin=(event)=>{
     event.preventDefault();
     const form = new FormData(event.currentTarget);
@@ -21,13 +23,23 @@ export default function Login() {
                 position:"top-right"
             });
 
-            navigate("/");
+            navigate(location?.state ? location.state : "/login");
         })
         .catch((error)=>{
             console.error(error);
         })
 
          }
+         const handleGoogleLogin=()=>{
+          loginWithGoogle().then((res)=>{console.log(res);
+              toast.success("User Google Login Successfully",{
+                  position:"top-right"
+              });
+          navigate(location?.state ? location.state : "/login");
+          }).catch((error)=>{
+          console.error(error);
+          });
+          }
 
   return (
     <div>
@@ -101,6 +113,7 @@ export default function Login() {
                       </span>
                     </button>
                     <button
+                     onClick={handleGoogleLogin}
                       type="button"
                       className="btn btn-outline btn-error mt-2"
                     >

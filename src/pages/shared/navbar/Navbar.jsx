@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../Provider/AuthProvider'
 
 export default function Navbar() {
@@ -14,9 +14,9 @@ export default function Navbar() {
     };
     const navLink=(
         <>
-        <li><navLink to="/" className="text-gray-300">Home</navLink></li>
-        <li><navLink to="/about" className="text-gray-300">About</navLink></li>
-        <li><navLink to="/career" className="text-gray-300">Career</navLink></li>
+        <li><NavLink to="/" className="text-gray-300">Home</NavLink></li>
+        <li><NavLink to="/about" className="text-gray-300">About</NavLink></li>
+        <li><NavLink to="/career" className="text-gray-300">Career</NavLink></li>
         </>
     )
   return (
@@ -55,7 +55,7 @@ export default function Navbar() {
           <div className="navbar-end">
             <span className="text-gray-300 px-2">{user.displayName}</span>
             <img src={user.photoURL} alt="profilePicture" className="w-10 h-10 rounded-full border border-white p-1 m-2"/>
-            <Link to="/login">
+            <Link to="/">
               <button
                 onClick={handleSignOut}
                 className="btn btn-outline btn-accent"

@@ -6,6 +6,8 @@ import Main from "../Layout/Main";
 import Home from "../pages/shared/home/Home";
 import Login from "../login/Login";
 import Register from "../register/Register";
+import PrivateRoute from "./PrivateRoute";
+import DetailsNewsPage from "../pages/DetailsNewsPage";
   
   const router = createBrowserRouter([
     {
@@ -16,14 +18,22 @@ import Register from "../register/Register";
             path:"/",
             element:<Home />
         },
-        {
-            path:'/login',
-            element:<Login/>
-        },
+        
         {
             path:'/register',
             element:<Register/>
-        }
+        },
+        {
+          path:"/news/:id",
+          element:<PrivateRoute>
+            <DetailsNewsPage/>
+          </PrivateRoute>
+          
+      },
+      {
+        path:'/login',
+        element:<Login />
+    }
       ],
     },
   ]); 
